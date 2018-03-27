@@ -1,0 +1,17 @@
+
+body {
+  color: blue;
+}
+
+h1 {
+  color: green;
+}
+
+#borderimg {
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url(The Witcher Wild Hunt pic.jpg) 30 stretch;
+}
+body {
+  background-image: url("The Witcher Wild Hunt pic.jpg");
+}
