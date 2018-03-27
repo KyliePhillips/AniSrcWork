@@ -1,0 +1,176 @@
+
+<!DOCTYPE HTML>
+<html>
+<Head>
+  <title>Stream Your Favorite Anime On One Site!</title> 
+  <meta charset="utf-8">
+  <title>Favorite Animes</title>
+  <style type="text/css">
+    button,
+    div,
+    form,
+    input {
+      margin: 10px;
+    }
+  </style>
+</Head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<Body>
+		<h1 style="background-color:rgb(255, 43, 80);">
+				
+	<div id="lineDrawing">
+		<svg viewBox="0 0 280 100">
+					<!--  -->
+			<g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="1" class="lines">
+				  <!--  -->
+				<path d="M58 80V50.12C57.7 41.6 51.14 35 43 35a15 15 0 0 0 0 30h7.5v15H43a30 30 0 1 1 0-60c16.42 0 29.5 13.23 30 29.89V80H58z"
+					stroke-dasharray="316.85528564453125" style="stroke-dashoffset: 315.83px;"></path>
+					<!--  -->
+				<path d="M73 80V20H58v60h15z" stroke-dasharray="150" style="stroke-dashoffset: 150px;"></path>
+					<!-- the N -->
+				<path d="M58 80V49.77C58.5 33.23 71.58 20 88 20a30 30 0 0 1 30 30v30h-15V50a15 15 0 0 0-15-15c-8.14 0-14.7 6.6-15 15.12V80H58zm75 0V20h-15v60h15z"
+					stroke-dasharray="441.1739501953125" style="stroke-dashoffset: 441.174px;"></path>
+					<!-- top of S -->
+				 <path d="M118 80V49.77C118.5 43.23 161.58 20 148 20a30 20 0 0 1 30 20v10h-15V50a15 15 0 0 0-15-15c-8.14 0-15.7 6.6-15 15.12V80h-15zm-7.5-60a7.5 7.5 0 1 1-6.48 8v-1c.25-3.9 4.5-7 7.48-7z"
+					stroke-dasharray="336.6053894042969" style="stroke-dashoffset: 338.305px;"></path>
+					<!-- bottom of S -->
+					<path d="M168.864 35V22.17C168.5 23.63 131.58 20 124 50a30.6 20.5 0.37 0 1 30 25.8v6.5h-10V60a8 13 0 0 0-8-2c 0 0 1.57 0-13.9 6.6-15 13.10V30h-15zm-7.5-60a6.3"
+					stroke-dasharray="336.6053894042969" style="stroke-dashoffset: 338.305px;"></path>
+					<!-- the R -->
+				 <path d="M133 65a15 15 0 0 1-15-15v-7.5h-15V50a30 30 0 0 0 30 30V65zm30 15V49.77C163.5 33.23 176.58 20 193 20a30 30 0 0 1 30 30v15h-15V50a15 15 0 0 0-15-15c-8.14 0-14.7 6.6-15 15.12V80h-15z"
+					stroke-dasharray="406.8699035644531" style="stroke-dashoffset: 406.87px;"></path>
+					<!-- the C -->
+				<path d="M238 65a15 15 0 0 1 0-30c8.1 0 14.89 6.73 15 15h-15v15h30V49.86C267.5 30.23 254.42 20 238 20a30 30 0 0 0 0 60V65z"
+					stroke-dasharray="301.8561706542969" style="stroke-dashoffset: 301.856px;"></path>
+					<!-- the Period -->
+				<path d="M260.48 68a8.5 6.5 0 1 1-8.48 4.8v-1c.49-3.9 3.5-7 7.48-8z" stroke-dasharray="47.128875732421875" style="stroke-dashoffset: 47.1289px;"></path>
+				<path d="M260.48 68a8.5 6.5 0 1 1-8.48 4.8v-1c.49-3.9 3.5-7 7.48-8z" stroke-dasharray="47.128875732421875" style="stroke-dashoffset: 47.1289px;"></path>
+			</g>
+		</svg>
+	</div>
+   </h1>
+	<script scr="anie.css"></script>
+	<script src="assets/anime.min.js"></script>
+	<script src="Ani.js"></script>
+
+  <h1 style="background-color:rgb(55, 63, 180);">Welcome to AniSrc an new way of searching for anime</h1>
+  <div class="container">
+    <h1>Anime Search</h1>
+
+    <!-- Rendered buttons will get dumped Here  -->
+    <div id="buttons-view"></div>
+
+    <form id="anime-form">
+      <label for="anime-input">Select A Best Girl Bro</label>
+      <input type="text" id="anime-input"><br>
+
+      <!-- Button triggers new anime to be added -->
+      <input id="add-anime" type="submit" value="Select A Best Girl Bro">
+    </form>
+
+    <!--Animes will get dumped here -->
+    <div id="animes-view"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // Initial array of animes
+      var animes = ["Sailor Moon Crystal", "Bleach", "Lupin The 3rd", "Overlord"];
+
+      // displayAnimeInfo function re-renders the HTML to display the appropriate content
+      function displayAnimeInfo() {
+
+        var anime = $(this).attr("data-name");
+        var queryURL = "https://api.jikan.me/search/anime/" + anime;
+
+        // Creates AJAX call for the specific anime button being clicked
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+          console.log(response);
+          // YOUR CODE GOES HERE!!!
+          // Create Div for content
+          for (var i = 0; i < 9; i++) {
+
+          var animeDiv = $("<div>");
+          // Give div Title
+          animeDiv.append("<h2>" + response.result[i].title + "</h2>");
+          // Give episodes
+          animeDiv.append("<p>" + response.result[i].episodes + "</p>");
+          // Give release description
+          animeDiv.append("<p>" + response.result[i].description + "</p>");
+          // Give score
+          animeDiv.append("<p>" + response.result[i].score + "</p>");
+          
+         
+          
+          // Create Image
+          var picturesImg = $("<img>");
+          // IF I had a predefined class to style it
+          picturesImg.addClass("myClassName");
+          // Give image src attribute
+          picturesImg.attr("src", response.result[i].image_url);
+          // Give image alt attribute
+          picturesImg.attr("alt", response.result[i].title);
+          // Add image to div
+          animeDiv.append(picturesImg);
+          
+          // Add div above previous content in animes-view
+          $("#animes-view").prepend(animeDiv);
+          }
+
+        });
+
+      }
+
+      // Function for displaying anime data
+      function renderButtons() {
+
+        // Deletes the animes prior to adding new animes
+        // (this is necessary otherwise you will have repeat buttons)
+        $("#buttons-view").empty();
+
+        // Loops through the array of animes
+        for (var i = 0; i < 9; i++) {
+
+          // Then dynamicaly generates buttons for each anime in the array
+          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+          var a = $("<button>");
+          // Adds a class of anime to our button
+          a.addClass("anime");
+          // Added a data-attribute
+          a.attr("data-name", animes[i]);
+          // Provided the initial button text
+          a.text(animes[i]);
+          // Added the button to the buttons-view div
+          $("#buttons-view").append(a);
+        }
+      }
+
+      // This function handles events where the add anime button is clicked
+      $("#add-anime").on("click", function(event) {
+        event.preventDefault();
+        // This line of code will grab the input from the textbox
+        var anime = $("#anime-input").val().trim();
+
+        // The anime from the textbox is then added to our array
+        animes.push(anime);
+
+        // Calling renderButtons which handles the processing of our anime array
+        renderButtons();
+
+      });
+
+      // Adding click event listeners to all elements with a class of "anime"
+      $(document).on("click", ".anime", displayAnimeInfo);
+
+      // Calling the renderButtons function to display the intial buttons
+      renderButtons();
+    </script>
+  </div>
+</Body>
+
+</html>
